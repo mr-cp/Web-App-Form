@@ -23,7 +23,7 @@ class Mobile extends StatefulWidget {
 }
 
 class _MobileState extends State<Mobile> {
-  FormScreenController formScreenController = Get.put(FormScreenController());
+  final formScreenController = Get.put(FormScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,31 +50,37 @@ class _MobileState extends State<Mobile> {
                     builder: (formScreenController) {
                       String? title;
                       String? subtitle;
-          
+
                       switch (formScreenController.selectedIndex) {
                         case 0:
                           title = formScreenController.stepList[0]['title'];
-                          subtitle = formScreenController.stepList[0]['subTitle'];
+                          subtitle =
+                              formScreenController.stepList[0]['subTitle'];
                           break;
                         case 1:
                           title = formScreenController.stepList[1]['title'];
-                          subtitle = formScreenController.stepList[1]['subTitle'];
+                          subtitle =
+                              formScreenController.stepList[1]['subTitle'];
                           break;
                         case 2:
                           title = formScreenController.stepList[2]['title'];
-                          subtitle = formScreenController.stepList[2]['subTitle'];
+                          subtitle =
+                              formScreenController.stepList[2]['subTitle'];
                           break;
                         case 3:
                           title = formScreenController.stepList[3]['title'];
-                          subtitle = formScreenController.stepList[3]['subTitle'];
+                          subtitle =
+                              formScreenController.stepList[3]['subTitle'];
                           break;
                         case 4:
                           title = formScreenController.stepList[4]['title'];
-                          subtitle = formScreenController.stepList[4]['subTitle'];
+                          subtitle =
+                              formScreenController.stepList[4]['subTitle'];
                           break;
                         case 5:
                           title = formScreenController.stepList[5]['title'];
-                          subtitle = formScreenController.stepList[5]['subTitle'];
+                          subtitle =
+                              formScreenController.stepList[5]['subTitle'];
                           break;
                       }
                       return Column(
@@ -179,6 +185,13 @@ class _MobileState extends State<Mobile> {
                                               if (value == null ||
                                                   value.isEmpty) {
                                                 return 'Field empty';
+                                              }
+                                              if (!formScreenController
+                                                  .isValidEmail(
+                                                      formScreenController
+                                                          .emailController
+                                                          .text)) {
+                                                return 'Invalid email';
                                               }
                                               return null;
                                             },
@@ -285,7 +298,9 @@ class _MobileState extends State<Mobile> {
                                         text: 'Save Draft',
                                         backgroundColor: Colors.white,
                                         textColor: AppColors.deepOrange,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          formScreenController.saveFormData();
+                                        },
                                         borderSide: const BorderSide(
                                             color: AppColors.deepOrange,
                                             width: 1),
@@ -326,7 +341,7 @@ class _MobileState extends State<Mobile> {
                     }),
               ),
             ),
-          
+
             // box 2::::::::::::::
             Container(
               height: 500,
@@ -447,10 +462,11 @@ class _MobileState extends State<Mobile> {
                     ),
                     SizedBox(height: widget.h * 0.007),
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 7, vertical: 3),
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(4)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(4)),
                         border: Border.all(width: 0.3, color: Colors.black87),
                       ),
                       child: const CustomText(

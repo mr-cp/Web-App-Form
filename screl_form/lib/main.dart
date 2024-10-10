@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 
+
+import 'screens/model/form_data.dart';
 import 'screens/view/form_screeen.dart';
 
 void main() {
+  // final forms = FormsData(
+  //     email: 'rishad551@gmail.com',
+  //     name: 'rishad',
+  //     preview: 'None',
+  //     subject: 'Physics');
+
+  // print('---------------------------------------');
+  // print(forms.toJson());
+  // print('---------------------------------------');
+
   runApp(const MyApp());
 }
 

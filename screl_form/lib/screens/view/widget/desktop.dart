@@ -23,7 +23,7 @@ class Desktop extends StatefulWidget {
 }
 
 class _DesktopState extends State<Desktop> {
-  FormScreenController formScreenController = Get.put(FormScreenController());
+  final formScreenController = Get.put(FormScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -167,6 +167,11 @@ class _DesktopState extends State<Desktop> {
                                         if (value == null || value.isEmpty) {
                                           return 'Field empty';
                                         }
+                                        if (!formScreenController.isValidEmail(
+                                            formScreenController
+                                                .emailController.text)) {
+                                          return 'Enter a valid email';
+                                        }
                                         return null;
                                       },
                                     ),
@@ -268,7 +273,9 @@ class _DesktopState extends State<Desktop> {
                                   text: 'Save Draft',
                                   backgroundColor: Colors.white,
                                   textColor: AppColors.deepOrange,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    formScreenController.saveFormData();
+                                  },
                                   borderSide: const BorderSide(
                                       color: AppColors.deepOrange, width: 1),
                                 ),
@@ -311,7 +318,7 @@ class _DesktopState extends State<Desktop> {
       // box 2::::::::::::::
       Container(
         height: widget.h * 0.8,
-        width: widget.w * 0.20,
+        width: widget.w * 0.2,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
         margin: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
@@ -325,7 +332,7 @@ class _DesktopState extends State<Desktop> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 300,
+                height: widget.h * 0.35,
                 child: ListView.builder(
                   itemCount: formScreenController.stepList.length,
                   shrinkWrap: true,
@@ -356,7 +363,7 @@ class _DesktopState extends State<Desktop> {
                                           ['index'] ??
                                       '',
                                   style: GoogleFonts.roboto(
-                                    fontSize: 12,
+                                    fontSize: widget.h * 0.016,
                                     fontWeight: FontWeight.w400,
                                     color: formScreenController.selectedIndex ==
                                             index
@@ -366,7 +373,7 @@ class _DesktopState extends State<Desktop> {
                                   textAlign: TextAlign.center,
                                 ),
                               )),
-                          SizedBox(width: widget.h * 0.015),
+                          const SizedBox(width: 15),
                           Flexible(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
